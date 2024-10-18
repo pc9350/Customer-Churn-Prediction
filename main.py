@@ -6,6 +6,9 @@ import os
 from openai import OpenAI
 import utils as ut
 
+# Set the page background to black
+ut.set_page_style()
+
 client = OpenAI(
   base_url="https://api.groq.com/openai/v1",
   api_key=os.environ.get("GROQ_API_KEY"),
@@ -195,7 +198,7 @@ if selected_customer_option:
           selected_customer['Geography']))
 
     gender = st.radio("Gender", ["Male", "Female"],
-                     index=0 if selected_customer['Gender'] == 'Male'                         else 1)
+                     index=0 if selected_customer['Gender'] == 'Male' else 1)
 
     age = st.number_input(
       "Age",

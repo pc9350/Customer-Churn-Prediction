@@ -1,4 +1,44 @@
 import plotly.graph_objects as go
+import streamlit as st
+
+def set_page_style():
+    style = '''
+    <style>
+    .stApp {
+        background-color: #1E1E2E;  /* Dark purplish background */
+    }
+    /* Main text color */
+    .stMarkdown, .stText, h1, h2, h3, h4, h5, h6, p {
+        color: #FFFFFF !important;
+    }
+    /* Input fields */
+    .stTextInput > div > div > input, 
+    .stSelectbox > div > div > select, 
+    .stNumberInput > div > div > input {
+        color: #FFFFFF !important;
+        background-color: #2A2A3E !important;
+    }
+    /* Radio buttons and checkboxes */
+    .stRadio > div, .stCheckbox > label > div {
+        color: #FFFFFF !important;
+    }
+    /* Slider */
+    .stSlider > div > div > div {
+        color: #FFFFFF !important;
+    }
+    /* Button */
+    .stButton > button {
+        color: #FFFFFF !important;
+        background-color: #3E3E5E !important;
+        border: 1px solid #5E5E7E !important;
+    }
+    /* Sidebar */
+    .css-1d391kg {
+        background-color: #2A2A3E;
+    }
+    </style>
+    '''
+    st.markdown(style, unsafe_allow_html=True)
 
 def create_gauge_chart(probability):
   #Determine coloe based on churn probability

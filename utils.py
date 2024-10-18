@@ -117,11 +117,28 @@ def create_model_probability_chart(probabilities):
     go.Bar(y=models, x=probs, orientation='h', text=[f'{p:.2%}' for p in probs], textposition='auto')
   ])
 
-  fig.update_layout(title='Churn Probability by Model',
-                   yaxis_title='Models',
-                   xaxis_title='Probability',
-                   xaxis=dict(tickformat='.0%', range=[0,1]),
-                   height=400,
-                   margin=dict(l=20, r=20, t=40, b=20))
+  fig.update_layout(
+        title='Churn Probability by Model',
+        title_font_color="white",  # Set title color to white
+        yaxis_title='Models',
+        yaxis_title_font_color="white",  # Set y-axis title color to white
+        xaxis_title='Probability',
+        xaxis_title_font_color="white",  # Set x-axis title color to white
+        xaxis=dict(
+            tickformat='.0%', 
+            range=[0,1], 
+            color="white",
+            tickfont=dict(color="white")  # Set x-axis tick label color to white
+        ),
+        yaxis=dict(
+            color="white",
+            tickfont=dict(color="white")  # Set y-axis tick label color to white
+        ),
+        height=400,
+        margin=dict(l=20, r=20, t=40, b=20),
+        paper_bgcolor="#1E1E2E",  # Set paper background to match page background
+        plot_bgcolor="#1E1E2E",  # Set plot background to match page background
+        font=dict(color="white")  # Set overall font color to white
+    )
 
   return fig

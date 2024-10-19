@@ -121,7 +121,7 @@ def explain_prediction(probability, input_dict, surname):
 - If the customer has less than a 40% risk of churning, generate a 3 sentence explanation of why they might not be at a risk of churning.
 - Your explanaton should be based on the customer's information, the summary statistics of churned and non-churned customers, adn the feature importances provided.
 
-  Don't mention the probability of churning, or the machine learning model, or say anything like" Based on the machine learning model's prediction and top 10 most imoportant features", just explain the prediciton.
+  Don't mention the probability of churning, or the machine learning model, or say anything like" Based on the machine learning model's prediction and top 10 most imoportant features", or something about the customer's specific information like credit score and age andtenure or any other inormation, just explain the prediction.
         
         
   """
@@ -154,7 +154,8 @@ def generate_email(probability, input_dict, explanation, surname):
     - Loyalty rewards or cashback programs
 
     Ensure the tone is friendly and customer-centric, focusing on building long-term value. Avoid mentioning the churn probability or any machine learning predictions.
-    Also do not mention anything after the email signature.
+    Also do not mention anything after the email signature. End the email with an email sign off like warm regards or kind regards or something else and then after that in the next line "HS Bank's Customer Service Team".
+    The email should end after these instructions. There shouldn't ne any text after this.
     """
   raw_response = client.chat.completions.create(
       model="llama-3.1-8b-instant",

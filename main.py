@@ -138,19 +138,24 @@ def explain_prediction(probability, input_dict, surname):
   return raw_response.choices[0].message.content
 
 def generate_email(probability, input_dict, explanation, surname):
-  prompt = f"""YOur are a manager at HS Bank. You are responsible for ensuring customers with the bank are incentivized with various offers.
-  Your noticd a customer named {surname} has a {round(probability * 100, 1)}% probability of churning.
+  prompt = f"""
+    You are a manager at HS Bank, responsible for customer retention. A customer named {surname} has shown a {round(probability * 100, 1)}% chance of churning.
 
-  Here is the customer's information:
-  {input_dict}
+    Customer Information:
+    {input_dict}
 
-  Here is some explanation as to why the cutsomer might be at risk of churning:
-  {explanation}
+    Churn Risk Explanation:
+    {explanation}
 
-  Generate an email to the customer based on their information, asking them to stay if they are at risk of churning, or offering them incentives so that they become more loyal to the bank.
+    Based on this, draft a personalized email encouraging the customer to remain with the bank. Highlight tailored incentives to improve their loyalty, such as:
+    - Exclusive offers on products
+    - Personalized financial advice
+    - Reduced fees or special interest rates
+    - Loyalty rewards or cashback programs
 
-  Make sure to list out a set of incentives to stay based on their information, in bullet point format. Don't ever mention the probability of churning, or the machine learning model to the customer.
-  """
+    Ensure the tone is friendly and customer-centric, focusing on building long-term value. Avoid mentioning the churn probability or any machine learning predictions.
+    Also do not mention anything after the email signature.
+    """
   raw_response = client.chat.completions.create(
       model="llama-3.1-8b-instant",
       messages=[{

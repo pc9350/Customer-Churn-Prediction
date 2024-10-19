@@ -117,8 +117,8 @@ def explain_prediction(probability, input_dict, surname):
     Here are summry statistics for non-churned customers:
     {df[df['Exited'] == 0].describe()}
 
-- If the customer ahs over a 40% risk o fchuning, generate a 3 sentence explanation of why they are at a risk of churning.
--If the customer has less than a 40% risk of churning, generate a 3 sentence explanation of why they might not be at a risk of churning.
+- If the customer ahs over a 40% risk of churning, generate a 3 sentence explanation of why they are at a risk of churning.
+- If the customer has less than a 40% risk of churning, generate a 3 sentence explanation of why they might not be at a risk of churning.
 - Your explanaton should be based on the customer's information, the summary statistics of churned and non-churned customers, adn the feature importances provided.
 
   Don't mention the probability of churning, or the machine learning model, or say anything like" Based on the machine learning model's prediction and top 10 most imoportant features", just explain the prediciton.
@@ -162,6 +162,16 @@ def generate_email(probability, input_dict, explanation, surname):
   print("\n\nEMAIL PROMPT", prompt)
   
   return raw_response.choices[0].message.content 
+
+def calculate_percentiles(selected_customer, df):
+    percentiles = {}
+    metrics = ['NumOfProducts', 'Balance', 'EstimatedSalary', 'Tenure', 'CreditScore']
+    
+    for metric in metrics:
+        # Calculate the percentile of the selected customer in comparison to the whole dataset
+        percentiles[metric] = (df[metric] < selected_customer[metric]).mean() * 100
+    
+    return percentiles
 
 
 st.title("Customer Churn Prediciton")
@@ -237,9 +247,18 @@ if selected_customer_option:
       min_value=0.0,
       value=float(selected_customer['EstimatedSalary']))
     
+
+  # Calculate percentiles for selected customer
+  percentiles = calculate_percentiles(selected_customer, df)
+    
   input_df, input_dict = prepare_input(credit_Score, location, gender, age, tenure, balance, num_products, has_credit_card, is_active_member, estimated_salary)
 
   avg_probability = make_predicitons(input_df, input_dict)
+
+  # Create and display the percentile chart
+  st.subheader("Customer Percentiles")
+  fig_percentiles = ut.create_percentile_chart(percentiles)
+  st.plotly_chart(fig_percentiles, use_container_width=True)
 
   explanation = explain_prediction(avg_probability, input_dict, selected_customer['Surname'])
 

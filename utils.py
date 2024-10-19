@@ -142,3 +142,33 @@ def create_model_probability_chart(probabilities):
     )
 
   return fig
+
+def create_percentile_chart(percentiles):
+    metrics = list(percentiles.keys())
+    values = list(percentiles.values())
+    
+    fig = go.Figure(data=[
+        go.Bar(y=metrics, x=values, orientation='h', text=[f'{v:.1f}%' for v in values], textposition='auto')
+    ])
+    
+    fig.update_layout(
+        xaxis_title='Percentile',
+        xaxis_title_font_color="white",
+        yaxis_title='Metric',
+        yaxis_title_font_color="white",
+        xaxis=dict(
+            range=[0, 100], 
+            tickvals=[0, 20, 40, 60, 80, 100],  # increments of 20
+            ticktext=['0%', '20%', '40%', '60%', '80%', '100%'],  # Display as percentage
+            color="white",  # Set axis color
+            tickfont=dict(color="white")  # Set tick label color
+        ),
+        yaxis=dict(color="white", tickfont=dict(color="white")),
+        paper_bgcolor="#1E1E2E",
+        plot_bgcolor="#1E1E2E",
+        font=dict(color="white"),
+        height=400,
+        margin=dict(l=20, r=20, t=40, b=20)
+    )
+    
+    return fig

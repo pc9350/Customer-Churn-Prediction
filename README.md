@@ -2,6 +2,8 @@
 
 A full-stack application built using Streamlit that predicts customer churn using machine learning models and automates personalized communication for retention strategies. This project is designed to help businesses identify customers at risk of churning and take proactive measures to retain them.
 
+### [Live Demo](https://churncrunch.streamlit.app/)
+
 ## Features
 
 - **Churn Prediction**: Uses various machine learning models like XGBoost, Random Forest, and K-Nearest Neighbors to predict the likelihood of customer churn.
@@ -34,7 +36,7 @@ Ensure you have the following installed on your system:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/customer-churn-prediction-app.git
+    git clone https://github.com/pc9350/Customer-Churn-Prediction.git
     cd customer-churn-prediction-app
     ```
 

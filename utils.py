@@ -5,7 +5,7 @@ def set_page_style():
     style = '''
     <style>
     .stApp {
-        background-color: #1E1E2E;  /* Dark purplish background */
+        background-color: #1E1E2F;  /* Dark purplish background */
     }
     /* Main text color */
     .stMarkdown, .stText, h1, h2, h3, h4, h5, h6, p {

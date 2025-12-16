@@ -129,7 +129,7 @@ def explain_prediction(probability, input_dict, surname):
   print("EXPLANATION PROMPT", prompt)
 
   raw_response = client.chat.completions.create(
-    model="llama-3.2-3b-preview",
+    model="llama-3.1-8b-instant",
     messages=[{
       "role": "user",
       "content": prompt
